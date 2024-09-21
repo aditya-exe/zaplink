@@ -20,11 +20,7 @@ const Navbar: FC<INavbar> = ({ user }) => {
           Zaplink
         </Link>
       </div>
-      <UserAvatar
-        userName={user.name ?? ""}
-        userId={user.id}
-        userImage={user.image ?? ""}
-      />
+      <UserAvatar userName={user.name ?? ""} userImage={user.image ?? ""} />
     </div>
   );
 };

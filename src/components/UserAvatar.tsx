@@ -10,18 +10,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { signOut } from "next-auth/react";
 import { Icons } from "./Icons";
 import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 
 interface IUserAvatar {
   userImage: string;
   userName: string;
-  userId: string;
 }
 
-const UserAvatar: FC<IUserAvatar> = ({ userName, userId, userImage }) => {
+const UserAvatar: FC<IUserAvatar> = ({ userName, userImage }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -30,26 +28,25 @@ const UserAvatar: FC<IUserAvatar> = ({ userName, userId, userImage }) => {
           <AvatarFallback>{userName.charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="dark w-56 bg-neutral-800 shadow-lg border-2 rounded-md border-yellow-400">
+      <DropdownMenuContent className="dark w-56 rounded-md border-2 border-yellow-400 bg-neutral-800 shadow-lg">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuItem>
-          <Link
-            href={`/user/${userId}`}
-            className={buttonVariants({ variant: "link" })}
-          >
+          <Link href={`/me`} className={buttonVariants({ variant: "link" })}>
             Manage your account
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="text-yellow-400" />
         <DropdownMenuItem>
-          <Button
-            onClick={() => signOut()}
-            variant={"link"}
-            className="flex items-center gap-x-1"
+          <Link
+            href="/api/log-out"
+            className={buttonVariants({
+              variant: "link",
+              className: "flex items-center gap-x-1",
+            })}
           >
             <Icons.logout />
             Logout
-          </Button>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
